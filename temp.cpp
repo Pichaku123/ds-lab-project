@@ -45,14 +45,10 @@ public:
     void displayMenu() {
         Node* temp = head;
         cout << "\n--- MENU ---\n";
-        cout << left << setw(5) << "ID" << setw(15) << "Name" 
-             << setw(10) << "Price" << "Ingredient\n";
+        cout << left << setw(5) << "ID" << setw(15) << "Name" << setw(10) << "Price" << "Ingredient\n";
         cout << "-----------------------------------------\n";
         while (temp) {
-            cout << left << setw(5) << temp->item.id 
-                 << setw(15) << temp->item.name 
-                 << setw(10) << temp->item.price 
-                 << temp->item.ingredient << "\n";
+            cout << left << setw(5) << temp->item.id << setw(15) << temp->item.name << setw(10) << temp->item.price << temp->item.ingredient << "\n";
             temp = temp->next;
         }
     }
@@ -151,10 +147,7 @@ class BST {
     void inorder(Node* node) {
         if (!node) return;
         inorder(node->left);
-        cout << left << setw(5) << node->item.id 
-             << setw(15) << node->item.name 
-             << setw(10) << node->item.price 
-             << node->item.ingredient << "\n";
+        cout << left << setw(5) << node->item.id << setw(15) << node->item.name << setw(10) << node->item.price << node->item.ingredient << "\n";
         inorder(node->right);
     }
 
