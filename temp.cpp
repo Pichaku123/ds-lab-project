@@ -177,6 +177,19 @@ public:
         heapifyUp(size);
     }
 
+    void updateSales(string name, int count = 1) {
+        bool found = false;
+        for (int i = 1; i <= size; i++) {
+            if (heap[i].name == name) {
+                heap[i].sales += count;
+                heapifyUp(i);
+                found = true;
+                break;
+            }
+        }
+        if (!found) insert(name, count);
+    }
+
     void showTopSelling() {
         cout << "\n--- TOP SELLING ITEMS ---\n";
         for (int i = 1; i <= size; i++)
@@ -206,11 +219,12 @@ int main() {
     heap.insert("Coffee", 60);
 
     int choice;
+    float totalBill = 0;
     do {
         cout << "\n===== RESTAURANT SYSTEM =====\n";
         cout << "1. Show Menu\n2. Place Order\n3. Undo Last Order\n";
         cout << "4. Show Order History\n5. Show Sorted Menu (by Price)\n";
-        cout << "6. Show Top Selling Items\n0. Exit\nEnter choice: ";
+        cout << "6. Show Top Selling Items\n7. Show Total Bill\n0. Exit\nEnter choice: ";
         cin >> choice;
 
         if (choice == 1)
@@ -223,6 +237,8 @@ int main() {
             if (item) {
                 cout << "Ordered: " << item->name << " for Rs." << item->price << "\n";
                 history.push(item->name);
+                heap.updateSales(item->name);
+                totalBill += item->price;
             } else
                 cout << "Invalid ID!\n";
         } else if (choice == 3)
@@ -233,6 +249,8 @@ int main() {
             bst.showSortedMenu();
         else if (choice == 6)
             heap.showTopSelling();
+        else if (choice == 7)
+            cout << "Total Bill: Rs." << totalBill << "\n";
     } while (choice != 0);
 
     cout << "Thank you! Visit again.\n";
